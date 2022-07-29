@@ -1,0 +1,19 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+textarea {
+    width: 500px;
+    height: 500px;
+    margin: 15px;
+}
+
+p {
+    margin: 15px;
+}
+
+button {
+    margin: 15px;
+}
