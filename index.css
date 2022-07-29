@@ -5,7 +5,6 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Roboto Slab', serif;
-    background-color: #ffffff;
 }
 
 body {
@@ -28,10 +27,15 @@ p {
 button {
     display: inline-block;
     margin: 15px;
-    padding: 5px;
-    border: 1px solid;
+    padding: 15px;
+    border: 0px;
     border-radius: 5px;
     cursor: pointer;
+}
+
+button:hover {
+    background-color: white;
+    box-shadow: 0 0 5px 5px #e1e1e1;
 }
 
 summary {
