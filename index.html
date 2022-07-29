@@ -10,10 +10,20 @@
     <title>Обожаю комменты</title>
 </head>
 <body>
-<textarea id="numbers"></textarea>
+<div class="first-column">
+<textarea id="numbers" placeholder="Добавьте номера заявок"></textarea>
+<br><button id="comments">Открыть заявки в новой вкладке</button>
+<button id="statistic">Открыть статистику</button>
 <p>Формат ввода: номер заявки на отдельной строке,
 <br>например: <br><br>123456<br>098765<br>542353</p>
 <p>Можно скопировать столбец из Excel.</p>
-<button>Открыть заявки в новой вкладке</button>
+</div>
+<div class="second-column">
+<details>
+    <summary>Если открывается только первая заявка (одна вкладка)</summary>
+    <img src="./img/fix.png">
+    <p id="fix">Нужно для настроек сайта разрешить "Всплывающие окна"</p>
+</details>
+</div>
 </body>
 </html>

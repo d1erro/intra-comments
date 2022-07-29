@@ -1,13 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Roboto Slab', serif;
+    background-color: #ffffff;
+}
+
+body {
+    display: flex;
+}
+
+.first-column, .second-column {
+    margin: 15px;
 }
 
 textarea {
     width: 500px;
     height: 500px;
-    margin: 15px;
 }
 
 p {
@@ -15,5 +26,25 @@ p {
 }
 
 button {
+    display: inline-block;
     margin: 15px;
+    padding: 5px;
+    border: 1px solid;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+summary {
+    cursor: pointer;
+}
+
+#fix {
+    background-color: #6fce6f;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+::marker {
+    color: #6fce6f;
+    font-size: x-large;
 }
