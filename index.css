@@ -11,29 +11,39 @@ body {
     display: flex;
 }
 
-.first-column, .second-column {
-    margin: 15px;
+.first-column {
+    width: 90%;
+    height: 90%;
+    margin: 5px;
+    padding: 15px;
+}
+
+.second-column {
+    border: 1px solid #4F4F4F;
+    width: 90%;
+    margin: 20px;
 }
 
 textarea {
-    width: 500px;
-    height: 500px;
+    width: 90%;
+    min-height: 400px;
+    /*margin: 15px;*/
 }
 
 p {
-    margin: 15px;
+    margin-bottom: 15px;
 }
 
-button {
+.first-column-button {
     display: inline-block;
-    margin: 15px;
+    margin: 10px 15px 10px 0px;
     padding: 15px;
     border: 0px;
     border-radius: 5px;
     cursor: pointer;
 }
 
-button:hover {
+.first-column-button:hover {
     background-color: white;
     box-shadow: 0 0 5px 5px #e1e1e1;
 }
@@ -48,7 +58,53 @@ summary {
     border-radius: 5px;
 }
 
+#template {
+    width: 350px;
+}
+
 ::marker {
     color: #6fce6f;
     font-size: x-large;
+}
+
+.notice-list {
+    /*border: 1px solid;*/
+    display: flex;
+    flex-direction: column;
+}
+
+.notice {
+    padding: 5px;
+    margin: 5px;
+    background-color: darkgray;
+    border: 1px solid #4F4F4F;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.notice:hover {
+    /*cursor: pointer;*/
+}
+
+img {
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.done-notice {
+    background-color: #6fce6f;
+}
+
+.fail-notice {
+    background-color: #ce6f6f;
+}
+
+#add-comments {
+    margin: 0px 0px 5px 50px;
+}
+
+.switch-area {
+    margin: 15px 0px 5px 0px;
+    display: inline-flex;
+    justify-content: space-around;
 }
