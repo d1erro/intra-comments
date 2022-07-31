@@ -7,6 +7,11 @@
     font-family: 'Roboto Slab', serif;
 }
 
+h4 {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
 body {
     display: flex;
 }
@@ -27,7 +32,6 @@ body {
 textarea {
     width: 90%;
     min-height: 400px;
-    /*margin: 15px;*/
 }
 
 p {
@@ -59,7 +63,10 @@ summary {
 }
 
 #template {
+    margin-top: 15px;
+    padding: 5px;
     width: 350px;
+    min-height: 30px;
 }
 
 ::marker {
@@ -68,7 +75,6 @@ summary {
 }
 
 .notice-list {
-    /*border: 1px solid;*/
     display: flex;
     flex-direction: column;
 }
@@ -80,10 +86,6 @@ summary {
     border: 1px solid #4F4F4F;
     border-radius: 15px;
     cursor: pointer;
-}
-
-.notice:hover {
-    /*cursor: pointer;*/
 }
 
 img {
@@ -115,4 +117,15 @@ img {
 
 .in-progress {
     background-color: #cea86f;
+}
+
+details {
+    background-color: #f3f3f3;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+details:hover {
+    background-color: white;
+    box-shadow: 0 0 5px 5px #e1e1e1;
 }
