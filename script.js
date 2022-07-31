@@ -1,9 +1,23 @@
 const openNoticesInNewTabButton = document.querySelector('#add-comments');
+const inputRange = document.querySelector('input[type=range]');
 
 let uniqueArray = [];
 let arrayNotices = [];
 let currentTemplate = '';
-let radioButtonValue;
+let inputRangeValue = Number(inputRange.value);
+let startValue = 0;
+let endValue = inputRangeValue;
+let isFirstOpen = true;
+let prevArray = [];
+let currentArray = [];
+
+printInputRangeValue(inputRangeValue);
+
+inputRange.addEventListener('change', (e) => {
+    inputRangeValue = Number(e.target.value);
+    endValue = inputRangeValue;
+    printInputRangeValue(inputRangeValue);
+})
 
 const inputTemplate = document.querySelector('#template');
 inputTemplate.addEventListener('change', (e) => {
@@ -16,18 +30,32 @@ textArea.addEventListener('change', () => {
     const inputNumbers = document.getElementById('numbers').value;
     arrayNotices = inputNumbers.split('\n');
     uniqueArray = getUniqueElementsArray(arrayNotices);
+    printNoticesInTable();
 });
 
 openNoticesInNewTabButton.addEventListener('click', () => {
-    for (let i = 0; i < uniqueArray.length; i++) {
-        window.open(`${currentTemplate}${uniqueArray[i]}`);
-    }
-});
-
-const printNoticesButton = document.querySelector('#print-notices');
-printNoticesButton.addEventListener('click', () => {
-    for (let num of uniqueArray) {
-        printNotices(num);
+    const currentArray = uniqueArray.slice(startValue, endValue);
+    if (isFirstOpen) {
+        for (let i = 0; i < currentArray.length; i++) {
+            const notice = document.querySelector(`#notice${currentArray[i]}`);
+            notice.classList.add('in-progress');
+        }
+        prevArray = currentArray.slice();
+        openNoticesInNewTab(currentArray);
+        isFirstOpen = false;
+    } else {
+        for (let i = 0; i < prevArray.length; i++) {
+            const notice = document.querySelector(`#notice${prevArray[i]}`);
+            notice.classList.remove('in-progress');
+            notice.classList.add('done-notice');
+        }
+        for (let i = 0; i < currentArray.length; i++) {
+            const notice = document.querySelector(`#notice${currentArray[i]}`);
+            notice.classList.add('in-progress');
+            prevArray = [];
+            prevArray = currentArray.slice();
+        }
+        openNoticesInNewTab(currentArray);
     }
 });
 
@@ -60,10 +88,13 @@ noticeList.addEventListener('click', (e) => {
     }
 })
 
-const getRadioButtons = document.querySelector('.switch-buttons');
-getRadioButtons.addEventListener('change', (e) => {
-
-})
+function openNoticesInNewTab(arr) {
+    for (let i = 0; i < arr.length; i++) {
+        window.open(`${currentTemplate}${arr[i]}`);
+    }
+    startValue += inputRangeValue;
+    endValue += inputRangeValue;
+}
 
 function getUniqueElementsArray(array) {
     const result = [];
@@ -73,13 +104,15 @@ function getUniqueElementsArray(array) {
     return result;
 }
 
-function printNotices(notice) {
-    const createNotice = document.createElement('button');
-    createNotice.className = 'notice';
-    createNotice.innerText = `Заявка: ${notice} | Комментариев - ${amountNoticeInArray
-    (notice, arrayNotices)}`;
-    createNotice.id = `notice${notice}`;
-    noticeList.append(createNotice);
+function printNoticesInTable() {
+    for (let num of uniqueArray) {
+        const createNotice = document.createElement('button');
+        createNotice.className = 'notice';
+        createNotice.innerText = `Заявка: ${num} | Комментариев - ${amountNoticeInArray
+        (num, arrayNotices)}`;
+        createNotice.id = `notice${num}`;
+        noticeList.append(createNotice);
+    }
 }
 
 function amountNoticeInArray(notice, array) {
@@ -101,4 +134,18 @@ function printCurrentTemplate(str) {
 
 function setCurrentTemplate(str) {
     currentTemplate = str;
+}
+
+function printInputRangeValue(value) {
+    const getInputRangeValue = document.querySelector('.input-display-range')
+    const createInputRangeValue = document.createElement('p');
+    createInputRangeValue.innerText = `Количество заявок: ${value}`;
+    createInputRangeValue.className = 'input-display-range'
+    const rangeInfo = document.querySelector('.range-info');
+    if (getInputRangeValue === null) {
+        rangeInfo.prepend(createInputRangeValue);
+    } else {
+        getInputRangeValue.replaceWith(createInputRangeValue);
+    }
+
 }

@@ -15,20 +15,16 @@
 <div class="first-column">
 <textarea id="numbers" placeholder="Добавьте номера заявок"></textarea>
     <input placeholder="Укажите шаблон, например https://site.ru/admin/" id="template" name="template" autocomplete="on">
-    <br><div class="switch-area">
-    <div class="switch-buttons">
-            <input type="radio" id="all-notices" name="opening-tabs">
-            <label for="all-notices">Все заявки</label>
-            <br>
-            <input type="radio" id="selected-notices" name="opening-tabs">
-            <label for="selected-notices">Несколько заявок</label>
-        </div>
-        <div>
-            <button id="add-comments" class="first-column-button">Открыть заявки <br>в новой вкладке</button>
-        </div>
+    <br><div class="settings">
+            <div class="range-info">
+                <input type="range" id="count-of-notices" name="count-of-notices"
+               min="1" max="25" value="2">
+            </div>
+            <div>
+                <button id="add-comments" class="first-column-button">Открыть заявки в новой вкладке</button>
+            </div>
     </div>
 <br>
-    <button id="print-notices" class="first-column-button">Заполнить таблицу</button>
     <br><button id="clear-textarea" class="first-column-button">Очистить список</button>
     <button id="clear-table" class="first-column-button">Очистить таблицу</button>
 <p>Формат ввода: номер заявки на отдельной строке,
