@@ -5,7 +5,6 @@ const textArea = document.querySelector('textarea');
 const resetTextArea = document.querySelector('#clear-textarea');
 const noticeList = document.querySelector('.notice-list');
 const clearTableButton = document.querySelector('#clear-table');
-const getAmountNoticesInDisplay = document.querySelector('h4');
 
 let uniqueArray = [];
 let arrayNotices = [];
@@ -30,19 +29,20 @@ inputTemplate.addEventListener('change', (e) => {
     printCurrentTemplate(currentTemplate);
 })
 
-
-
 textArea.addEventListener('change', () => {
     clearTable();
     const inputNumbers = document.getElementById('numbers').value;
-    arrayNotices = inputNumbers.split('\n');
-    uniqueArray = getUniqueElementsArray(arrayNotices);
+    // arrayNotices = inputNumbers.split('\n');
+    arrayNotices = inputNumbers.match(/\d{7}/gm);
     remainderNoticesArray = arrayNotices.slice();
+    uniqueArray = getUniqueElementsArray(arrayNotices);
     printNoticesInTable();
 });
 
 openNoticesInNewTabButton.addEventListener('click', () => {
     const currentArray = uniqueArray.slice(startValue, endValue);
+    deleteNoticeFromRemainderArray(prevArray);
+    printRemainderNotices();
     if (isFirstOpen) {
         setClass(currentArray, 'in-progress');
         prevArray = currentArray.slice();
@@ -61,22 +61,26 @@ resetTextArea.addEventListener('click' , () => {
     textArea.value = '';
     uniqueArray = [];
     arrayNotices = [];
+    prevArray = [];
+    remainderNoticesArray = [];
+    isFirstOpen = true;
+    startValue = 0;
 });
 
 clearTableButton.addEventListener('click', () => {
     clearTable();
 });
 
-noticeList.addEventListener('click', (e) => {
-    const notice = document.querySelector(`#${e.target.id}`);
-    if (!notice.classList.value.includes('done-notice')) {
-        notice.classList.remove('fail-notice');
-        notice.classList.add('done-notice');
-    } else {
-        notice.classList.remove('done-notice');
-        notice.classList.add('fail-notice');
-    }
-})
+// noticeList.addEventListener('click', (e) => {
+//     const notice = document.querySelector(`#${e.target.id}`);
+//     if (!notice.classList.value.includes('done-notice')) {
+//         notice.classList.remove('fail-notice');
+//         notice.classList.add('done-notice');
+//     } else {
+//         notice.classList.remove('done-notice');
+//         notice.classList.add('fail-notice');
+//     }
+// })
 
 function openNoticesInNewTab(arr) {
     for (let i = 0; i < arr.length; i++) {
@@ -95,11 +99,7 @@ function getUniqueElementsArray(array) {
 }
 
 function printNoticesInTable() {
-    const createAmountNoticesInDisplay = document.createElement('h4');
-    const amountDoneNotices = document.querySelectorAll('.notice-list + button :not(.done-notice)');
-    createAmountNoticesInDisplay.innerText = `Осталось комментариев: ${amountDoneNotices.length}`;
-    console.log(amountDoneNotices)
-    noticeList.append(createAmountNoticesInDisplay);
+    printRemainderNotices();
     for (let num of uniqueArray) {
         const createNotice = document.createElement('button');
         createNotice.className = 'notice';
@@ -163,3 +163,20 @@ function clearTable() {
     })
 }
 
+function deleteNoticeFromRemainderArray(arr) {
+    for (let i = 0; i < arr.length; i++) {
+        remainderNoticesArray = remainderNoticesArray.filter(num => num !== arr[i]);
+        console.log(remainderNoticesArray);
+    }
+}
+
+function printRemainderNotices() {
+    const getAmountNoticesInDisplay = document.querySelector('h4');
+    const createAmountNoticesInDisplay = document.createElement('h4');
+    createAmountNoticesInDisplay.innerText = `Осталось комментариев: ${remainderNoticesArray.length}`;
+    if (getAmountNoticesInDisplay === null) {
+        noticeList.append(createAmountNoticesInDisplay);
+    } else {
+        getAmountNoticesInDisplay.replaceWith(createAmountNoticesInDisplay);
+    }
+}
